@@ -7,13 +7,8 @@ filebeat_inputs:
     paths:
       - "/var/log/*.log"
 
-filebeat_output_elasticsearch_enabled: false
-filebeat_output_elasticsearch_hosts:
-  - "localhost:9200"
-
-filebeat_output_logstash_enabled: true
 filebeat_output_logstash_hosts:
-  - "localhost:5044"
+  - "logstash-server-ip:5044"
 
 filebeat_enable_logging: false
 filebeat_log_level: warning
