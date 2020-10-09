@@ -11,7 +11,10 @@
     mode: 0644
 
 - name: Install Filebeat.
-  package: name=filebeat state=present
+  yum:
+    name:
+      - filebeat
+    state: present
 
 - include: config.yml
   when: filebeat_create_config | bool

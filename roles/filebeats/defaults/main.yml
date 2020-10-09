@@ -8,7 +8,7 @@ filebeat_inputs:
       - "/var/log/*.log"
 
 filebeat_output_logstash_hosts:
-  - "logstash-server-ip:5044"
+  - "34.72.28.143:5044"
 
 filebeat_enable_logging: false
 filebeat_log_level: warning
@@ -16,6 +16,6 @@ filebeat_log_dir: /var/log/mybeat
 filebeat_log_filename: mybeat.log
 
 filebeat_ssl_dir: /etc/pki/logstash
-filebeat_ssl_certificate_file: ""
-filebeat_ssl_key_file: ""
-filebeat_ssl_insecure: "false"
+filebeat_ssl_certificate_file: "/root/ansible/Softserve_DevOps_Demo_1/roles/filebeats/filebeat.crt"
+filebeat_ssl_key_file: "/root/ansible/Softserve_DevOps_Demo_1/roles/filebeats/filebeat.key"
+filebeat_ssl_insecure: "true"

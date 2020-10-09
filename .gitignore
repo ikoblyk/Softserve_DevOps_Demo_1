@@ -1,0 +1,3 @@
+roles/filebeats/*.crt
+roles/filebeats/*.key
+
