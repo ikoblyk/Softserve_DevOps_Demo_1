@@ -10,8 +10,24 @@
     dest: /etc/yum.repos.d/beats.repo
     mode: 0644
 
+
+
+
+#- name: Adding repo
+#  yum_repository:
+#     name: elastic
+#     description: elastic repo
+#     baseurl: https://artifacts.elastic.co/packages/7.x/yum
+#     gpgcheck: yes
+#     gpgkey: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+
+
+
+
+
 - name: Install Filebeat.
   yum:
+    enablerepo: elastic-7.x  
     name:
       - filebeat
     state: present
