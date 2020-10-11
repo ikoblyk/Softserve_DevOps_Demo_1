@@ -8,7 +8,7 @@ filebeat_inputs:
       - "/var/log/*.log"
 
 filebeat_output_logstash_hosts:
-  - "34.66.163.48:5044"
+  - "logstash:5044"
 
 filebeat_enable_logging: false
 filebeat_log_level: warning
