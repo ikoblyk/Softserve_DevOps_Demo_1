@@ -1,43 +1,25 @@
-filebeat:
-  # List of inputs.
-  inputs:
-    {{ filebeat_inputs | to_json }}
-
-# Configure what outputs to use when sending the data collected by the beat.
-# Multiple outputs may be used.
-output:
-
- logstash:
-   # The Logstash hosts
-   hosts: {{ filebeat_output_logstash_hosts | to_json }}
-
-
-{% if filebeat_ssl_certificate_file and filebeat_ssl_key_file %}
-    # ssl configuration. By default is off.
-    ssl:
-      # List of root certificates for HTTPS server verifications
-      certificate_authorities: ["{{ filebeat_ssl_dir }}/{{ filebeat_ssl_certificate_file | basename }}"]
-
-      # Certificate for TLS client authentication
-      certificate: "{{ filebeat_ssl_dir }}/{{ filebeat_ssl_certificate_file | basename }}"
-
-      # Client Certificate Key
-      key: "{{ filebeat_ssl_dir }}/{{ filebeat_ssl_key_file | basename}}"
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /var/log/*.log
+    - /var/log/messages
+    - /var/log/secure  
+    - /var/log/cron
+    - /var/log/firewalld
+    - /var/log/sssd/*.log
+ 
 
 
-      insecure: {{ filebeat_ssl_insecure }}
+output.logstash:
+    enabled: true
+    hosts: ["{{ filebeat_output_logstash_hosts }}:5044"]
 
-      # Configure cipher suites to be used for TLS connections
-      #cipher_suites: []
 
-      # Configure curve types for ECDHE based cipher suites
-      #curve_types: []
-{% endif %}
 
-{% if filebeat_enable_logging %}
 logging:
   ### Filebeat log
-  level: {{ filebeat_log_level }}
+  level: warning
 
   # Enable file rotation with default configuration
   to_files: true
@@ -45,8 +27,3 @@ logging:
   # Do not log to syslog
   to_syslog: false
 
-  files:
-    path: {{ filebeat_log_dir }}
-    name: {{ filebeat_log_filename }}
-    keepfiles: 7
-{% endif %}

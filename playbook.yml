@@ -1,5 +1,4 @@
-- hosts: 127.0.0.1
-  connection: local 
+- hosts: one
   remote_user: "{{ ansible_system_user }}"
   vars_files:
     - group_vars/all.yml
